@@ -1,0 +1,39 @@
+.overviewCallToActionsHomePage{
+	display:grid;
+	grid-template-columns: repeat(4, auto);
+	font-size: 12px;
+	margin-top: -13px;
+}
+
+
+.overviewCallToActionsHomePage button{
+
+}
+
+.overviewCallToActionsHomePage button p{
+	margin: 0px;
+	font-size: 16px;
+
+	/*
+	  color: #ffffff;
+	  text-transform: uppercase;
+	  text-decoration: none;
+
+	  display: inline-block;
+	  transform: scale(1, 1.5);
+	  -webkit-transform: scale(1, 1.5); /* Safari and Chrome */
+	
+	  /*-moz-transform: scale(1, 1.5); /* Firefox */
+	  /*-ms-transform: scale(1, 1.5); /* IE 9+ */
+	  /*-o-transform: scale(1, 1.5); /* Opera */
+	
+	}
+.button-aanwezig{
+	background-color: skyBlue;
+    background-image: linear-gradient(to bottom, #87CEEB, #4682B4);
+    border: 1px solid #4682B4;
+    box-shadow: inset 0 1px 0 #4682B4, inset 0 -1px 0 #4682B4, inset 0 0 0 1px #4682B4, 0 2px 4px rgba(0, 0, 0, 0.2);
+    color: white;
+    text-shadow: 0 1px 2px rgba(0, 0, 0, 0.3);
+}
+

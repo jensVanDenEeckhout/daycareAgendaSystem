@@ -1,0 +1,69 @@
+<?php
+
+/*
+|--------------------------------------------------------------------------
+| Web Routes
+|--------------------------------------------------------------------------
+|
+| Here is where you can register web routes for your application. These
+| routes are loaded by the RouteServiceProvider within a group which
+| contains the "web" middleware group. Now create something great!
+|
+*/
+
+Route::get('/', function () {
+    return view('welcome');
+});
+
+	Route::get('/2/aanwezig/personeel', 'PagesController@personeelAanwezig');
+	Route::post('/2/attendanceListChangeStatusSelectedEmployee', 'PagesController@attendanceListChangeStatusSelectedEmployee');
+
+//unknown
+	Route::post('/tasks2/saveTasks', 'PagesController@saveTasks');
+
+
+// new
+	// overview of all the inhabitants of the institution
+	Route::get('/2/overzicht/bewoners', 'PagesController@overzichtBewoners');
+
+	// after making a selection of all the desired inhabitants you will see their daily tasks based on the selected day
+	Route::post('/2/overzicht/taken', 'PagesController@overzichtTaken');
+	// click task, will mark it as done
+	Route::post('/2/overzicht/taken/taak/compleet', 'PagesController@taakCompleet');
+
+	// ability to change the tasks of the selected inhabitants
+	Route::post('/2/bewerken/taken', 'PagesController@bewerkenTaken');
+	Route::post('/2/bewerken/taken/aanpassen/taak', 'PagesController@aanpassenTaak');
+	Route::post('/2/bewerken/taken/aanpassen/verantwoordelijkeOrganisatie
+	', 'PagesController@aanpassenVerantwoordelijkeOrganisatie');
+
+
+Route::post('/2/toevoegen/taak', 'PagesController@toevoegenTaak');
+
+
+
+
+// nabor
+Route::get('/nabor', function () {
+    return view('nabor');
+});
+
+
+
+
+
+
+
+
+
+	//testing
+
+		Route::post('/tasks/post', 'PagesController@store');
+
+Auth::routes();
+
+Route::get('/home', 'HomeController@index')->name('home');
+
+Auth::routes();
+
+Route::get('/home', 'HomeController@index')->name('home');
