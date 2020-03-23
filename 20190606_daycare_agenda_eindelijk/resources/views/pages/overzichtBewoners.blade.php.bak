@@ -23,39 +23,25 @@
       <div id="checkboxesClients" style="text-align:center; margin: 0 auto;"></div>
 
       <div class="overviewCallToActionsHomePage">
-
-
-<div class="dropdown">
-        <select name="dayOfTheWeek" class="btn btn-secondary dropdown-toggle btn-lg" style="color: white;">
-          <option value="1" class="dropdown-item">Maandag</option>
-          <option value="2" class="dropdown-item">Dinsdag</option>
-          <option value="3" class="dropdown-item">Woensdag</option>
-          <option value="4" class="dropdown-item">Donderdag</option>
-          <option value="5" class="dropdown-item">Vrijdag</option>
-          <option value="6" class="dropdown-item">Zaterdag</option>
-          <option value="7" class="dropdown-item">Zondag</option>
+        <select name="dayOfTheWeek" class="DropdownDayOfTheWeek" style="background-color: #3498DB; color: white;">
+          <option value="1" style="background-color: teal;">Maandag</option>
+          <option value="2" style="background-color: teal;">Dinsdag</option>
+          <option value="3" style="background-color: teal;">Woensdag</option>
+          <option value="4" style="background-color: teal;">Donderdag</option>
+          <option value="5" style="background-color: teal;">Vrijdag</option>
+          <option value="6" style="background-color: teal;">Zaterdag</option>
+          <option value="7" style="background-color: teal;">Zondag</option>
         </select>
-</div>
 
-
-        <button class="btn btn-primary" formaction="{{URL::to('/2/overzicht/taken')}}">
-          <i class="fa fa-clock-o"> &nbsp;  Dagplanning</i>
+        <button class="button button-green" formaction="{{URL::to('/2/overzicht/taken')}}">
+          <i class="fa fa-clock-o" style="color:teal"></i>
+          <p>Dagplanning</p>
         </button>
 
-        <button class="btn button-orange" formaction="{{URL::to('/2/bewerken/taken')}}">
-          <i class="fa fa-exclamation-triangle">&nbsp; Aanpassen</i>
+        <button class="button button-orange" formaction="{{URL::to('/2/bewerken/taken')}}">
+          <i class="fa fa-exclamation-triangle" style="color:khaki"></i>
+          <p>Aanpassen</p>
         </button>
-
-
-        <a class="btn btn-success" href="{{URL::to('/2/toevoegen')}}"> <i class="fa fa-plus">&nbsp; Toevoegen</i></a>
-
-         <button class="btn btn-success" formaction="{{URL::to('/2/aanwezigheidslijst')}}">
-          <i class="fa fa-plus">&nbsp; Aanwezigheden</i>
-        </button>
-
-               
-
-
       </div>
     </form>
 
@@ -64,38 +50,32 @@
       <div class="employees" style="text-align:center;font-weight: bold;"></div>
     </div>
 
-  
+    <div class="headerSection">
+      <h1> Aanwezigheidslijst</h1>
+    </div>
+
+    <div id="checkboxesEmployees">
+      @foreach ($employees as $employee)
+        @if( $employee->attendance == 1 )
+          <div class="checkboxEmployee green">
+          <label class="checked" for="{{ $employee->name }}"> {{ $employee->name }}
+          <input type="hidden" id="{{ $employee->name }}" name="{{ $employee->name }}"value="{{ $employee->id }}" type="checkbox"/>
+          </label>
+        @elseif(   $employee->attendance == 0 )
+          <div class="checkboxEmployee">
+          <label for="{{ $employee->name }}"> {{ $employee->name }}
+          <input type="hidden" id="{{ $employee->name }}" name="{{ $employee->name }}"value="{{ $employee->id }}" type="checkbox"/>
+          </label>
+        @else
+        @endif
+        </div>
+      @endforeach
+      </div>
+    </div> 
+
+    
   </div> 
 </div>
-
-<style>
-  .btn{
-    font-size: 25px;
-    width: 215px;
-    height: 75px;
-    color:white;
-
-  }
-  .button-orange{
-      background-color: #f58a38;
-      background-image: linear-gradient(to bottom, #f58a38, #f57c20);
-      border: 1px solid #c25706;
-      box-shadow: inset 0 1px 0 #ffb984, inset 0 -1px 0 #db6f1d, inset 0 0 0 1px #f59851, 0 2px 4px rgba(0, 0, 0, 0.2);
-      text-shadow: 0 1px 2px rgba(0, 0, 0, 0.3);
-  }
-  .button-orange i{ 
-      color: white;   
-  } 
-
-  #checkboxesFloors{
-    max-width: 1200px;
-  }
-  .overviewCallToActionsHomePage{
-    margin-top: 22px;
-    text-align: center;
-  }
-  
-</style>
 
 <script src="/js/jquery-3.4.1.js"></script>
 <script type="text/javascript">
@@ -124,9 +104,21 @@
     }
 
 
- 
+    $( ".checkboxEmployee" ).on( "click", function(e) {
+      $(this).toggleClass('green');
+      var selectedEmployee = $(this).find('input');
+      var selectedEmployeeId = selectedEmployee.val();
+      var selectedEmployeeIdInArray = selectedEmployeeId-1;
+      var attendance = 1 - employees[selectedEmployeeIdInArray]['attendance'];
+      e.preventDefault();
+      $.ajax({
+      type:'POST',
+      url:'/2/attendanceListChangeStatusSelectedEmployee',
+      data:{id:selectedEmployeeId, attendance:attendance},
+      success:function(data){ }
+      });
+    }); 
 
-    // n
     createComboboxEmployeesForCommentSection();
     function createComboboxEmployeesForCommentSection(){
       var employeeSection = "";
@@ -140,7 +132,6 @@
       $('.employees').append(employeeSection);      
     }
 
-    // n
     $("#employeesCombobox").change(function() {
       var selectedEmployee = $(this).val();
       var content = "";
@@ -156,7 +147,7 @@
       $('#commentBoxEmployee').remove();
       $('.employeesSection').append(content);
     });
-    // n
+
     $("label:contains('Iedereen')").on("click", function(e){
       $(this).prop( "checked", false );  
       $("#checkboxesClients .inputGroup input").each(function(){
@@ -165,7 +156,7 @@
     });
 
 
-    // n
+
     $("label").on("click", function(e){
       let floorName = $(this).html();
       for(var i in floors){

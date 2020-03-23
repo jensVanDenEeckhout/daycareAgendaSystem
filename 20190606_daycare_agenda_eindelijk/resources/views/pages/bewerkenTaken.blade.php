@@ -33,15 +33,7 @@
     </div>
 
 
-    <form class="formAddTask" action="{{URL::to('/2/toevoegen/taak')}}" method="post">
-      {{ csrf_field()}}
 
-        <input type="text" name="task_name" value="">
-        <button class="button button-orange">
-          <p>Taak Toevoegen</p>
-        </button>
-
-    </form>
 
 
  <div id="checkboxesEmployees" style="display: flex;flex-wrap: wrap; width:100%;text-align:center; margin: 0 auto;"></div>

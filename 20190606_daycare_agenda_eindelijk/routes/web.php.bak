@@ -38,16 +38,22 @@ Route::get('/', function () {
 	', 'PagesController@aanpassenVerantwoordelijkeOrganisatie');
 
 
-
-
-Route::get('/2/toevoegen','PagesController@toevoegen');
-
 Route::post('/2/toevoegen/taak', 'PagesController@toevoegenTaak');
 
-Route::post('/2/toevoegen/personeel', 'PagesController@toevoegenPersoneel');
 
 
-Route::post('/2/aanwezigheidslijst', 'PagesController@aanwezigheidslijst');
+
+// nabor
+Route::get('/nabor', function () {
+    return view('nabor');
+});
+
+
+
+
+
+
+
 
 
 	//testing
