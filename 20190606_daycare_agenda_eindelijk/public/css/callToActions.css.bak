@@ -3,7 +3,6 @@
 	grid-template-columns: repeat(4, auto);
 	font-size: 12px;
 	margin-top: 20px;
-	/* public html */
 }
 
 

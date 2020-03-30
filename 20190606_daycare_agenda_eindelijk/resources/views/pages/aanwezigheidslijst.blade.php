@@ -3,12 +3,11 @@
 @if(!Auth::guest())
   @if(Auth::user()->id == 1 )
     @section('content')     
-<link href="{{ asset('css/persons.css') }}" rel="stylesheet">
-<link href="{{ asset('css/employeesSection.css') }}" rel="stylesheet">
 
-<link href="{{ asset('css/attendanceListEmployees.css') }}" rel="stylesheet">
+<link href="{{ asset('css_refactor/attendanceListEmployees.css') }}" rel="stylesheet">
+
 <link rel='stylesheet' href='https://maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css'>
-<link href="{{ asset('css/callToActions.css') }}" rel="stylesheet">
+
 <div class="container" >
   <div class="content">
 

@@ -14,16 +14,13 @@
 
     
 
+  <a class="btn btn-warning" href="{{URL::to('/2/overzicht/bewoners')}}"> Terug gaan </a>
 
 
 
     <div class="tasksToChangeTable" style="margin-top: 5px; margin-left: 50px">
 
-        <form class="formSmallButton" action="{{URL::to('/2/overzicht/taken')}}" method="get">
-          <button class="buttonSmall button-orange"  formaction="{{URL::to('/2/overzicht/bewoners')}}">
-            <i class="fa fa-arrow-left" aria-hidden="true"></i>Terug gaan
-          </button>
-        </form>
+
 
       <div id="taskTableByAllSelectedClients" style="margin-top: 10px">
 

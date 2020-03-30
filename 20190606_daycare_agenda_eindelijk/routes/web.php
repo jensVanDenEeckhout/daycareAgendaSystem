@@ -27,12 +27,12 @@ Route::get('/', function () {
 	Route::get('/2/overzicht/bewoners', 'PagesController@overzichtBewoners');
 
 	// after making a selection of all the desired inhabitants you will see their daily tasks based on the selected day
-	Route::post('/2/overzicht/taken', 'PagesController@overzichtTaken');
+	Route::post('/2/overzicht/dagplanning', 'PagesController@overzichtDagplanning');
 	// click task, will mark it as done
 	Route::post('/2/overzicht/taken/taak/compleet', 'PagesController@taakCompleet');
 
 	// ability to change the tasks of the selected inhabitants
-	Route::post('/2/bewerken/taken', 'PagesController@bewerkenTaken');
+	Route::post('/2/bewerken/dagplanning', 'PagesController@bewerkenDagplanning');
 	Route::post('/2/bewerken/taken/aanpassen/taak', 'PagesController@aanpassenTaak');
 	Route::post('/2/bewerken/taken/aanpassen/verantwoordelijkeOrganisatie
 	', 'PagesController@aanpassenVerantwoordelijkeOrganisatie');
@@ -40,7 +40,7 @@ Route::get('/', function () {
 
 
 
-Route::get('/2/toevoegen','PagesController@toevoegen');
+Route::post('/2/toevoegen','PagesController@toevoegen');
 
 Route::post('/2/toevoegen/taak', 'PagesController@toevoegenTaak');
 
@@ -48,6 +48,8 @@ Route::post('/2/toevoegen/personeel', 'PagesController@toevoegenPersoneel');
 
 
 Route::post('/2/aanwezigheidslijst', 'PagesController@aanwezigheidslijst');
+
+Route::post('/2/notities', 'PagesController@notities');
 
 
 	//testing

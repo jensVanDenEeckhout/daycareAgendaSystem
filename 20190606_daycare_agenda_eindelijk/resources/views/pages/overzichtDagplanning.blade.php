@@ -6,36 +6,44 @@
     </head>
 	<link href="{{ asset('css/styles.css') }}" rel="stylesheet">
 	<link href="{{ asset('css/employeesSection.css') }}" rel="stylesheet">
+	<link href="{{ asset('css_refactor/overzichtDagplanning.css') }}" rel="stylesheet">
+
 <link rel='stylesheet' href='https://maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css'>
 
-	        <form class="formSmallButton" action="{{URL::to('/2/overzicht/taken')}}" method="get">
-              <button class="buttonSmallTaken button-orange"  style="margin-top: 6px;position: absolute;width: 111px;height: 26px;margin-left: -12px;" formaction="{{URL::to('/2/overzicht/bewoners')}}">
-                <i class="fa fa-arrow-left" aria-hidden="true" ></i>
-                Terug gaan
-              </button>
-      </form>
+<div class="container" >
+<div class="content">
 
-    <div style="margin-top: 5px; margin-left: 50px">
-    	<div id="taskTableByAllSelectedClients" style="margin-top: 10px"></div>
-    </div>
+		<a class="btn btn-warning" href="{{URL::to('/2/overzicht/bewoners')}}"> Terug gaan </a>
 
 
-
-    <h1 style="text-align:center"> Notitieblok </h1>
-    <div class="employeesSection">
-      <div class="employees" style="text-align:center;font-weight: bold;"></div>
-    </div>
-
+	
+	<div style="margin-top: 5px; margin-left: 50px">
+		<p class="dayOfTheWeek"> </p>
+		<div id="taskTableByAllSelectedClients" style="margin-top: 10px">
+					
+		</div>
+	</div>
+</div>
+</div>
 
 
 <script src="/js/jquery-3.4.1.js"></script>
     <script type="text/javascript">
         $(document).ready(function() {
 
+	      var day = {!! json_encode($day) !!};
+		var daysOfTheWeek = ["Maandag","Dinsdag","Woensdag","Donderdag","Vrijdag","Zaterdag","Zondag"];
+		$('.dayOfTheWeek').html (daysOfTheWeek[ day-1 ] );
+
+
         	console.log('test table blade page');
         	
 	        var clients = {!! json_encode($clients->toArray()) !!};   	
 	        var cellsGroupedByClient = {!! json_encode($cellsGroupedByClient->toArray()) !!};
+
+	        console.log( "cells");
+	        console.log( cellsGroupedByClient);
+	        console.log( cellsGroupedByClient[1][0].table_id);
 
 		    // get timestamps
 		    	var timestamps =  timestampsAsArray();
@@ -77,7 +85,9 @@
 					            table_body += '<thead>';
 					              table_body += '<tr>';
 					                for(var k = 0; k<clients.length;k++){
-					                  table_body += '<th class="tableNames">' + clients[k].name + '</th>';
+					                  table_body += 
+					                  '<th class="tableNames">' + clients[k].name + '<img  src="/' + clients[k].picture + 
+					                  '"></th>';
 					                }
 					              table_body += '</tr>';
 					            table_body += '</thead>';

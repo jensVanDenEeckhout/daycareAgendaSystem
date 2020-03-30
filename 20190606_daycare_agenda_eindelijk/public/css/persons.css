@@ -214,7 +214,7 @@ code {
   box-shadow: inset 0 2px 3px rgba(0, 0, 0, 0.2);
 }
 .button-orange .fa {
-  color: #c25706;
+  /*color: #c25706;*/
   text-shadow: 0 1px 0 rgba(255, 255, 255, 0.3);
 }
 

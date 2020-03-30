@@ -1,0 +1,24 @@
+.dayOfTheWeek{
+	position:absolute;
+	writing-mode: tb-rl;
+      transform: rotate(-165deg);
+}
+
+
+p{
+	color:black;
+	font-size: 20px;
+	margin-top:5px;
+	margin-left:9px;
+}
+
+
+thead img{
+	height:90px;
+	margin:0px 15px;
+}
+
+
+.tableNames{
+	text-align:center;
+}
