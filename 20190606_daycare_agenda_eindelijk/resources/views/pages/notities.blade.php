@@ -28,6 +28,7 @@
 </div>
 </div>
 
+<!--<example-component></example-component>-->
 
 <style>
 

@@ -10,6 +10,9 @@ use App\Client;
 use App\Floor;
 use App\Employee;
 use App\Category;
+use App\Timetracking;
+
+use DateTime;
 
 class PagesController extends Controller
 {
@@ -70,7 +73,7 @@ class PagesController extends Controller
             $task = new Task;
             $task->name = $task_name;
             $task->save();
-            return back();
+            return view('pages.toevoegen'); 
         }
 
         public function toevoegenPersoneel(Request $request){
@@ -80,12 +83,80 @@ class PagesController extends Controller
             $employee = new Employee;
             $employee->name = $employee_name;
             $employee->save();
-            return back();
+            return view('pages.toevoegen'); 
         }
 
             
         public function toevoegen(){
             return view('pages.toevoegen');
+        }
+
+
+
+        public function startTimeStart(Request $request){
+            date_default_timezone_set('Europe/Brussels');
+            $ldate = new DateTime();
+            $date = $ldate->format('Y-m-d');
+            $timestamp = $ldate->format('H:i:s');
+            //dd($timestamp);
+            $requests = $request->all();
+            $user_id = $request->input('user_id');
+
+            $timetracking = new Timetracking;
+
+            $timetracking->user_id = $user_id;
+            
+            $timetracking->start_date = $date;
+            $timetracking->start_time = $timestamp;
+            $timetracking->startStop_status = "start";
+
+            $timetracking->save();  
+            return view('pages.tijdsregistratie.overzicht');       
+        }      
+
+
+        public function timetracker_stop(Request $request){
+            date_default_timezone_set('Europe/Brussels');
+            $ldate = new DateTime();
+            $stop_date = $ldate->format('Y-m-d');
+            $stop_time = $ldate->format('H:i:s');
+
+            $lastrecord = DB::table('timetracking')
+                ->where('user_id', '=', $request->input('user_id'))
+                ->where('startStop_status', '=', 'start')
+                ->orderBy('id','desc')
+                ->first();
+
+                $ts1 = strtotime($lastrecord->start_time);
+                $ts2 = strtotime($stop_time);     
+                $seconds_diff = $ts2 - $ts1;     
+
+
+                $totalTime =   gmdate('H:i:s',$seconds_diff);                     
+                //dd( $totalTime );
+/*
+                $hours = round((($seconds_diff % 604800) % 86400) / 3600); 
+                $minutes = round(((($seconds_diff % 604800) % 86400) % 3600) / 60); 
+                $sec = round((((($seconds_diff % 604800) % 86400) % 3600) % 60));
+
+                $total = ($hours . ':' . $minutes . ':' . $sec);
+*/
+            $lastrecord = DB::table('timetracking')
+                ->where('user_id', '=', $request->input('user_id'))
+                ->where('startStop_status', '=', 'start')
+                ->orderBy('id','desc')
+                ->take(1)
+                ->update([
+                    'stop_date' => $stop_date,
+                    'stop_time' => $stop_time,
+                    'startStop_status' => 'stop',
+                    'total_time' => $totalTime
+                ]);  
+
+                return view('pages.tijdsregistratie.overzicht');     
+
+
+            //dd($lastrecord);  
         }
 
         

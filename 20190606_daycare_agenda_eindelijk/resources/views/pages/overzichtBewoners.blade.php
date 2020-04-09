@@ -51,6 +51,9 @@
 			<div>
 			  	<button class="btn btn-success" formaction="{{URL::to('/2/notities')}}"> 
 					<i class="fa fa-plus">&nbsp; Notities</i>
+			  	</button>	
+			  	<button class="btn btn-danger" formaction="{{URL::to('/2/tijdsregistratie/overzicht')}}"> 
+					<i class="fa fa-plus">&nbsp; tijdsregistratie</i>
 			  	</button>	   
 			</div>
 		</div>

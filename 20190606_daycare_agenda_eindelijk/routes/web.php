@@ -63,3 +63,16 @@ Route::get('/home', 'HomeController@index')->name('home');
 Auth::routes();
 
 Route::get('/home', 'HomeController@index')->name('home');
+
+
+
+// tijdsregistratie
+Route::post('/2/tijdsregistratie/overzicht','TijdsRegistratieController@tijdsregistratie_overzicht');
+
+
+Route::post('/2/startTime/now/start','PagesController@startTimeStart');
+
+Route::post('/2/timetracker/stop','PagesController@timetracker_stop');
+
+Route::post('/2/timetracker/seperatePerDate','TijdsRegistratieController@timetracker_seperatePerDate');
+
