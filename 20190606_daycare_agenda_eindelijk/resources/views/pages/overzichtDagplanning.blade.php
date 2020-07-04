@@ -12,11 +12,7 @@
 
 <div class="container" >
 <div class="content">
-
 		<a class="btn btn-warning" href="{{URL::to('/2/overzicht/bewoners')}}"> Terug gaan </a>
-
-
-	
 	<div style="margin-top: 5px; margin-left: 50px">
 		<p class="dayOfTheWeek"> </p>
 		<div id="taskTableByAllSelectedClients" style="margin-top: 10px">
@@ -38,12 +34,14 @@
 
         	console.log('test table blade page');
         	
+
 	        var clients = {!! json_encode($clients->toArray()) !!};   	
+
 	        var cellsGroupedByClient = {!! json_encode($cellsGroupedByClient->toArray()) !!};
 
-	        console.log( "cells");
-	        console.log( cellsGroupedByClient);
-	        console.log( cellsGroupedByClient[1][0].table_id);
+	        //console.log( "cells");
+	        //console.log( cellsGroupedByClient);
+	        //console.log( cellsGroupedByClient[1][0].table_id); // error because if there is only 1, you can't check the second
 
 		    // get timestamps
 		    	var timestamps =  timestampsAsArray();

@@ -43,8 +43,11 @@ Route::get('/', function () {
 Route::post('/2/toevoegen','PagesController@toevoegen');
 
 Route::post('/2/toevoegen/taak', 'PagesController@toevoegenTaak');
+Route::post('/2/verwijderen/taak', 'PagesController@verwijderenTaak');
+
 
 Route::post('/2/toevoegen/personeel', 'PagesController@toevoegenPersoneel');
+Route::post('/2/verwijderen/personeel', 'PagesController@verwijderenPersoneel');
 
 
 Route::post('/2/aanwezigheidslijst', 'PagesController@aanwezigheidslijst');

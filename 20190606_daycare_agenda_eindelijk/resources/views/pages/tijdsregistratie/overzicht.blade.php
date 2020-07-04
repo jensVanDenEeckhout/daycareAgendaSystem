@@ -1,7 +1,7 @@
 @extends('layouts.app')
 
 @if(!Auth::guest())
-@if(Auth::user()->id == 1 )
+@if(Auth::user()->permission == 2 )
 @section('content') 
 
 
@@ -20,7 +20,7 @@
 	<div class="timetracking"> 
 	    	<form action="/2/startTime/now/start" method="post">
 	    	{{ csrf_field()}}
-	    		<input type="hidden" name="user_id" value="{{ Auth::user()->id }}">
+	    		<input type="hidden" name="user_id" value="{{ Auth::user()->permission }}">
 	        	
 	        	<button type="submit" class="btn btn-success"  >
 	          		start
@@ -29,7 +29,7 @@
 
 	    	<form action="/2/timetracker/stop" method="post">
 	    	{{ csrf_field()}}
-	    		<input type="hidden" name="user_id" value="{{ Auth::user()->id }}">
+	    		<input type="hidden" name="user_id" value="{{ Auth::user()->permission }}">
 	        
 	        	<button type="submit" class="btn btn-danger"  >
 	          		stop
@@ -39,7 +39,7 @@
 
 	    	<form action="/2/timetracker/seperatePerDate" method="post">
 	    	{{ csrf_field()}}
-	    		<input type="hidden" name="user_id" value="{{ Auth::user()->id }}">
+	    		<input type="hidden" name="user_id" value="{{ Auth::user()->permission }}">
 	        
 	        	<button type="submit" class="btn btn-danger"  >
 	          		overview
@@ -47,7 +47,7 @@
 	    	</form>
 		
 
-	<p> {{ Auth::user()->id }}</p>
+	<p> {{ Auth::user()->permission }}</p>
 		
 
 

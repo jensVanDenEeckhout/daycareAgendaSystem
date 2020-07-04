@@ -1,7 +1,7 @@
 @extends('layouts.app')
 
 @if(!Auth::guest())
-@if(Auth::user()->id == 1 )
+@if(Auth::user()->permission == 2 )
 @section('content') 
 
 <link href="{{ asset('css/persons.css') }}" rel="stylesheet">
@@ -14,67 +14,64 @@
 
 
 <div class="container" >
-<div class="content">
-	<form class="formFloors" action="{{URL::to('/2/overzicht/taken')}}" method="post" style="height:75px;">    
-		<div name="floors" id="checkboxesFloors" style="text-align:center; margin: 0 auto;"></div>
-	</form>
+	<div class="content">
+		<form class="formFloors" action="{{URL::to('/2/overzicht/taken')}}" method="post" style="height:75px;">    
+			<div name="floors" id="checkboxesFloors" style="text-align:center; margin: 0 auto;"></div>
+		</form>
 
-	<form class="form" method="post">
+		<form class="form" method="post">
 
-		{{ csrf_field()}}
-		<div id="checkboxesClients" style="text-align:center; margin: 0 auto;"></div>
+			{{ csrf_field()}}
+			<div id="checkboxesClients" style="text-align:center; margin: 0 auto;"></div>
 
 
-		<div class="normal_user">
-			<div class="dropdown">
-				<select name="dayOfTheWeek" class="btn btn-secondary dropdown-toggle btn-lg" style="color: white;">
-				  <option value="1" class="dropdown-item">Maandag</option>
-				  <option value="2" class="dropdown-item">Dinsdag</option>
-				  <option value="3" class="dropdown-item">Woensdag</option>
-				  <option value="4" class="dropdown-item">Donderdag</option>
-				  <option value="5" class="dropdown-item">Vrijdag</option>
-				  <option value="6" class="dropdown-item">Zaterdag</option>
-				  <option value="7" class="dropdown-item">Zondag</option>
-				</select>
+			<div class="normal_user">
+				<div class="dropdown">
+					<select name="dayOfTheWeek" class="btn btn-secondary dropdown-toggle btn-lg" style="color: white;">
+					<option value="1" class="dropdown-item">Maandag</option>
+					<option value="2" class="dropdown-item">Dinsdag</option>
+					<option value="3" class="dropdown-item">Woensdag</option>
+					<option value="4" class="dropdown-item">Donderdag</option>
+					<option value="5" class="dropdown-item">Vrijdag</option>
+					<option value="6" class="dropdown-item">Zaterdag</option>
+					<option value="7" class="dropdown-item">Zondag</option>
+					</select>
+				</div>
+
+				<div class="dagplanning_button">
+					<button class="btn btn-primary" formaction="{{URL::to('/2/overzicht/dagplanning')}}">
+						<i class="fa fa-clock-o"> &nbsp;  Dagplanning</i>
+					</button>
+				</div>
+				<div>	
+					<button class="btn btn-success" formaction="{{URL::to('/2/aanwezigheidslijst')}}">
+						<i class="fa fa-user">&nbsp; Aanwezigheden</i>
+					</button> 
+				</div>
+				<div>
+					<button class="btn btn-success" formaction="{{URL::to('/2/notities')}}"> 
+						<i class="fa fa-plus">&nbsp; Notities</i>
+					</button>	
+					<button class="btn btn-danger" formaction="{{URL::to('/2/tijdsregistratie/overzicht')}}"> 
+						<i class="fa fa-plus">&nbsp; tijdsregistratie</i>
+					</button>	   
+				</div>
 			</div>
 
-			<div class="dagplanning_button">
-				<button class="btn btn-primary" formaction="{{URL::to('/2/overzicht/dagplanning')}}">
-					<i class="fa fa-clock-o"> &nbsp;  Dagplanning</i>
+			<div class="admin_user">     
+				<h1>Admin section</h1>
+				<div class="aanpassen_dagplanning_button">
+					<button class="btn button-orange" formaction="{{URL::to('/2/bewerken/dagplanning')}}"> 
+						<i class="fa fa-exclamation-triangle">&nbsp; Aanpassen</i>
+					</button>
+				</div>
+				<button class="btn btn-success" formaction="{{URL::to('/2/toevoegen')}}"> 
+					<i class="fa fa-plus">&nbsp; Toevoegen</i>
 				</button>
 			</div>
-			<div>	
-				<button class="btn btn-success" formaction="{{URL::to('/2/aanwezigheidslijst')}}">
-					<i class="fa fa-user">&nbsp; Aanwezigheden</i>
-				</button> 
-			</div>
-			<div>
-			  	<button class="btn btn-success" formaction="{{URL::to('/2/notities')}}"> 
-					<i class="fa fa-plus">&nbsp; Notities</i>
-			  	</button>	
-			  	<button class="btn btn-danger" formaction="{{URL::to('/2/tijdsregistratie/overzicht')}}"> 
-					<i class="fa fa-plus">&nbsp; tijdsregistratie</i>
-			  	</button>	   
-			</div>
-		</div>
 
-		<div class="admin_user">     
-			<h1>Admin section</h1>
-			<div class="aanpassen_dagplanning_button">
-			  	<button class="btn button-orange" formaction="{{URL::to('/2/bewerken/dagplanning')}}"> 
-					<i class="fa fa-exclamation-triangle">&nbsp; Aanpassen</i>
-			 	</button>
-			 </div>
-		  	<button class="btn btn-success" formaction="{{URL::to('/2/toevoegen')}}"> 
-				<i class="fa fa-plus">&nbsp; Toevoegen</i>
-		  	</button>
-		</div>
-
-	</form>
-
-
-  
-</div> 
+		</form>
+	</div> 
 </div>
 
 <style>

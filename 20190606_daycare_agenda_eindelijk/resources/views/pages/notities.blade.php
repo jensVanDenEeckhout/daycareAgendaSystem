@@ -4,7 +4,7 @@
 @extends('layouts.app')
 
 @if(!Auth::guest())
-	@if(Auth::user()->id == 1 )
+	@if(Auth::user()->permission == 2 )
 		@section('content') 
 
 
